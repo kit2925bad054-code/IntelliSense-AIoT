@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>IntelliSense AIoT</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+<main class="container">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header>
+
+        <div>
+
+            <p class="eyebrow">
+                AIoT MONITORING PLATFORM
+            </p>
+
+            <h1>
+                IntelliSense AIoT
+            </h1>
+
+            <p class="subtitle">
+                Intelligent sensor fault detection and
+                data recovery using sensor fusion.
+            </p>
+
+        </div>
+
+
+        <div class="live">
+
+            <span></span>
+
+            SYSTEM ONLINE
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         SENSOR CARDS
+    ====================================== -->
+
+    <section class="cards">
+
+
+        <!-- SENSOR S1 -->
+
+        <article class="card">
+
+            <p>
+                Sensor S1
+            </p>
+
+            <h2 id="s1-temp">
+                --°C
+            </h2>
+
+            <span
+                class="status"
+                id="s1-status">
+
+                WAITING
+
+            </span>
+
+            <small id="s1-time">
+                --
+            </small>
+
+        </article>
+
+
+
+        <!-- SENSOR S2 -->
+
+        <article class="card">
+
+            <p>
+                Sensor S2
+            </p>
+
+            <h2 id="s2-temp">
+                --°C
+            </h2>
+
+            <span
+                class="status"
+                id="s2-status">
+
+                WAITING
+
+            </span>
+
+            <small id="s2-time">
+                --
+            </small>
+
+        </article>
+
+
+
+        <!-- NETWORK -->
+
+        <article class="card">
+
+            <p>
+                Network Health
+            </p>
+
+            <h2 id="network-health">
+                --
+            </h2>
+
+            <span
+                class="status"
+                id="network-status">
+
+                WAITING
+
+            </span>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================
+         AI FAULT DETECTION
+    ====================================== -->
+
+    <section class="panel">
+
+        <div>
+
+            <p class="eyebrow">
+                AI FAULT DETECTION & DATA RECOVERY
+            </p>
+
+            <h2 id="recovery-title">
+                Waiting for sensor data...
+            </h2>
+
+            <p id="recovery-message">
+                The system is waiting for live
+                sensor readings.
+            </p>
+
+        </div>
+
+
+        <div
+            class="badge"
+            id="recovery-badge">
+
+            MONITORING
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         AI MODEL INFORMATION
+    ====================================== -->
+
+    <section class="panel">
+<div>
+
+    <div class="model-header">
+
+        <div>
+            <p class="eyebrow">
+                AI MODEL
+            </p>
+
+            <h2>
+                Sensor Relationship Regression
+            </h2>
+        </div>
+
+        <span class="model-badge">
+            ACTIVE
+        </span>
+
+    </div>
+
+    <p id="model-info">
+
+        The AI model learns the relationship between
+        healthy sensor readings and estimates the
+        expected value during abnormal behavior.
+
+    </p>
+
+    <div class="model-grid">
+
+        <div class="model-item">
+            <span>Training Samples</span>
+            <strong id="training-samples">--</strong>
+        </div>
+
+        <div class="model-item">
+            <span>Slope</span>
+            <strong id="model-slope">--</strong>
+        </div>
+
+        <div class="model-item">
+            <span>Intercept</span>
+            <strong id="model-intercept">--</strong>
+        </div>
+
+        <div class="model-item">
+            <span>Anomaly Threshold</span>
+            <strong>5.0°C</strong>
+        </div>
+
+    </div>
+
+</div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         TEMPERATURE CHART
+    ====================================== -->
+
+    <section class="panel chart-panel">
+
+        <div>
+
+            <p class="eyebrow">
+                LIVE DATA
+            </p>
+
+            <h2>
+                Temperature Overview
+            </h2>
+
+            <p class="subtitle">
+
+                Real-time comparison of sensor
+                temperature readings.
+
+            </p>
+
+        </div>
+
+
+        <div class="chart-container">
+
+            <canvas
+                id="temperatureChart">
+            </canvas>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         RECOVERY DETAILS
+    ====================================== -->
+
+    <section class="panel">
+
+        <div>
+
+            <p class="eyebrow">
+                RECOVERY DETAILS
+            </p>
+
+            <h2>
+                Latest Analysis
+            </h2>
+
+        </div>
+
+
+        <div class="recovery-grid">
+
+
+            <div>
+
+                <span>
+                    Actual Reading
+                </span>
+
+                <strong id="actual-value">
+                    --
+                </strong>
+
+            </div>
+
+
+
+            <div>
+
+                <span>
+                    Expected Reading
+                </span>
+
+                <strong id="expected-value">
+                    --
+                </strong>
+
+            </div>
+
+
+
+            <div>
+
+                <span>
+                    Recovered Value
+                </span>
+
+                <strong id="recovered-value">
+                    --
+                </strong>
+
+            </div>
+
+
+
+            <div>
+
+                <span>
+                    Difference
+                </span>
+
+                <strong id="difference-value">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+        </section>
+
+
+    <!-- =====================================
+         RECOVERY HISTORY
+    ====================================== -->
+
+
+    <!-- SYSTEM OVERVIEW -->
+<section class="panel system-overview">
+
+    <div class="panel-heading">
+        <div>
+            <p class="eyebrow">SYSTEM OVERVIEW</p>
+            <h2>Live System Status</h2>
+        </div>
+    </div>
+
+    <div class="overview-grid">
+
+        <div class="overview-card">
+            <span class="overview-label">Sensors Online</span>
+            <strong id="sensors-online">-- / --</strong>
+        </div>
+
+        <div class="overview-card">
+            <span class="overview-label">System Status</span>
+            <strong id="system-status">WAITING</strong>
+        </div>
+
+        <div class="overview-card">
+            <span class="overview-label">Recovery Events</span>
+            <strong id="recovery-count">0</strong>
+        </div>
+
+        <div class="overview-card">
+            <span class="overview-label">Last Update</span>
+            <strong id="last-update">--</strong>
+        </div>
+
+    </div>
+
+</section>
+
+    <section class="panel">
+
+        <div>
+
+            <p class="eyebrow">
+                RECOVERY HISTORY
+            </p>
+
+            <h2>
+                Sensor Fault Recovery Events
+            </h2>
+
+            <p class="subtitle">
+                Historical sensor faults detected and recovered by the AI system.
+            </p>
+
+        </div>
+
+
+        <div class="recovery-history-container">
+
+            <table class="recovery-history-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Time</th>
+
+                        <th>Sensor</th>
+
+                        <th>Original</th>
+
+                        <th>Expected</th>
+
+                        <th>Recovered</th>
+
+                        <th>Difference</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="recovery-history-body">
+
+                    <tr>
+
+                        <td colspan="7">
+                            Loading recovery history...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
+
+<script>
+
+
+    // =====================================
+    // CHART SETUP
+    // =====================================
+
+    const chartContext =
+        document
+            .getElementById(
+                "temperatureChart"
+            )
+            .getContext("2d");
+
+
+    const temperatureChart =
+    new Chart(
+
+        chartContext,
+
+        {
+
+            type: "line",
+
+            data: {
+
+                labels: [],
+
+                datasets: [
+
+                    {
+                        label: "Sensor S1",
+
+                        data: [],
+
+                        borderWidth: 2,
+
+                        tension: 0.3,
+
+                        fill: false,
+
+                        spanGaps: true,
+
+                        pointRadius: 3,
+
+                        pointHoverRadius: 6
+                    },
+
+                    {
+                        label: "Sensor S2",
+
+                        data: [],
+
+                        borderWidth: 2,
+
+                        tension: 0.3,
+
+                        fill: false,
+
+                        spanGaps: true,
+
+                        pointRadius: 3,
+
+                        pointHoverRadius: 6
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                animation: false,
+
+                interaction: {
+                    mode: "index",
+                    intersect: false
+                },
+
+                plugins: {
+
+                    legend: {
+                        display: true,
+                        position: "top"
+                    },
+
+                    tooltip: {
+                        enabled: true
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: false,
+
+                        title: {
+
+                            display: true,
+
+                            text: "Temperature (°C)"
+
+                        }
+
+                    },
+
+                    x: {
+
+                        title: {
+
+                            display: true,
+
+                            text: "Time"
+
+                        },
+
+                        ticks: {
+
+                            maxRotation: 45,
+
+                            minRotation: 0,
+
+                            autoSkip: true,
+
+                            maxTicksLimit: 10
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    );
+
+
+    // =====================================
+    // LOAD LATEST SENSOR DATA
+    // =====================================
+
+    function setSensorStatus(elementId, text, statusClass) {
+    const element = document.getElementById(elementId);
+
+    if (!element) return;
+
+    element.classList.remove(
+        "status-normal",
+        "status-online",
+        "status-recovering",
+        "status-fault",
+        "status-recovered",
+        "status-waiting",
+        "status-error"
+    );
+
+    element.classList.add(statusClass);
+    element.textContent = text;
+}
+
+
+async function loadSensorData() {
+    try {
+        const response = await fetch("/api/latest");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch sensor data");
+        }
+
+        const data = await response.json();
+
+        const sensors = data.sensors;
+
+        if (sensors.S1) {
+            document.getElementById("s1-temp").textContent =
+                Number(sensors.S1.temperature).toFixed(2) + "°C";
+
+            document.getElementById("s1-time").textContent =
+                sensors.S1.timestamp;
+
+            setSensorStatus(
+                "s1-status",
+                "NORMAL",
+                "status-normal"
+            );
+        }
+
+        if (sensors.S2) {
+            document.getElementById("s2-temp").textContent =
+                Number(sensors.S2.temperature).toFixed(2) + "°C";
+
+            document.getElementById("s2-time").textContent =
+                sensors.S2.timestamp;
+
+            setSensorStatus(
+                "s2-status",
+                "NORMAL",
+                "status-normal"
+            );
+        }
+
+    } catch (error) {
+        console.error("loadSensorData error:", error);
+    }
+}
+
+async function loadTemperatureHistory() {
+    try {
+        const response = await fetch("/api/history");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch temperature history");
+        }
+
+        const data = await response.json();
+
+
+        const history = data.data || [];
+
+        const labels = [];
+        const s1Data = [];
+        const s2Data = [];
+
+        history.forEach(item => {
+            labels.push(item.timestamp);
+
+            if (item.sensor_id === "S1") {
+                s1Data.push(item.temperature);
+                s2Data.push(null);
+            }
+
+            if (item.sensor_id === "S2") {
+                s1Data.push(null);
+                s2Data.push(item.temperature);
+            }
+        });
+
+        if (typeof temperatureChart !== "undefined" && temperatureChart) {
+            temperatureChart.data.labels = labels;
+
+            temperatureChart.data.datasets[0].data = s1Data;
+            temperatureChart.data.datasets[1].data = s2Data;
+
+            temperatureChart.update();
+        }
+
+    } catch (error) {
+        console.error(
+            "Temperature history error:",
+            error
+        );
+    }
+}
+async function updateSystemOverview() {
+
+    console.log("SYSTEM OVERVIEW FUNCTION RUNNING");
+
+    try {
+        // Get latest sensor data
+        const sensorResponse = await fetch("/api/latest");
+
+        if (!sensorResponse.ok) {
+            throw new Error("Failed to fetch latest sensor data");
+        }
+
+        const sensorData = await sensorResponse.json();
+
+        const sensors = sensorData.sensors || {};
+
+        // Count sensors that actually have data
+        let onlineCount = 0;
+
+        if (sensors.S1) {
+            onlineCount++;
+        }
+
+        if (sensors.S2) {
+            onlineCount++;
+        }
+
+        document.getElementById("sensors-online").textContent =
+            onlineCount + " / 2";
+
+
+        // -----------------------------
+        // LAST UPDATE
+        // -----------------------------
+
+        let latestTime = "--";
+
+        if (sensors.S1 && sensors.S1.timestamp) {
+            latestTime = sensors.S1.timestamp;
+        }
+
+        if (sensors.S2 && sensors.S2.timestamp) {
+            latestTime = sensors.S2.timestamp;
+        }
+
+        document.getElementById("last-update").textContent =
+            latestTime;
+
+
+        // -----------------------------
+        // RECOVERY EVENTS
+        // -----------------------------
+
+        const recoveryResponse =
+            await fetch("/api/recovery-history");
+
+        if (recoveryResponse.ok) {
+
+            const recoveryData =
+                await recoveryResponse.json();
+
+            document.getElementById("recovery-count").textContent =
+                recoveryData.count || 0;
+        }
+
+
+        // -----------------------------
+        // SYSTEM STATUS
+        // -----------------------------
+
+        const systemStatus =
+            document.getElementById("system-status");
+
+        if (onlineCount === 2) {
+
+            systemStatus.textContent = "NORMAL";
+            systemStatus.style.color = "#4ade80";
+
+        } else if (onlineCount === 1) {
+
+            systemStatus.textContent = "PARTIAL";
+            systemStatus.style.color = "#facc15";
+
+        } else {
+
+            systemStatus.textContent = "OFFLINE";
+            systemStatus.style.color = "#f87171";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "System overview error:",
+            error
+        );
+    }
+}
+
+    // =====================================
+// SENSOR STATUS HELPER
+// =====================================
+
+function setSensorStatus(
+    elementId,
+    text,
+    statusClass
+) {
+
+    const element =
+        document.getElementById(elementId);
+
+    if (!element) {
+        return;
+    }
+
+    // Remove previous status classes
+    element.classList.remove(
+        "status-normal",
+        "status-online",
+        "status-recovering",
+        "status-fault",
+        "status-recovered",
+        "status-waiting",
+        "status-error"
+    );
+
+    // Add new status class
+    element.classList.add(statusClass);
+
+    // Update displayed text
+    element.textContent = text;
+}
+
+
+
+// =====================================
+// LOAD DATA RECOVERY
+// =====================================
+
+async function loadDataRecovery() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/data-recovery"
+            );
+
+
+        const data = await response.json();
+        // Update AI model information
+if (document.getElementById("training-samples")) {
+    document.getElementById("training-samples").textContent =
+        data.training_samples ?? "--";
+}
+
+if (document.getElementById("model-slope")) {
+    document.getElementById("model-slope").textContent =
+        data.slope !== undefined && data.slope !== null
+            ? Number(data.slope).toFixed(4)
+            : "--";
+}
+
+if (document.getElementById("model-intercept")) {
+    document.getElementById("model-intercept").textContent =
+        data.intercept !== undefined && data.intercept !== null
+            ? Number(data.intercept).toFixed(4)
+            : "--";
+}
+
+
+
+
+        console.log(
+            "AI Analysis:",
+            data
+        );
+
+
+        // =================================
+        // NORMAL
+        // =================================
+
+        if (
+            data.status ===
+            "normal"
+        ) {
+
+            // Network
+            document
+                .getElementById(
+                    "network-health"
+                )
+                .textContent =
+                "100%";
+
+
+            document
+                .getElementById(
+                    "network-status"
+                )
+                .textContent =
+                "HEALTHY";
+
+
+            // Recovery panel
+            document
+                .getElementById(
+                    "recovery-title"
+                )
+                .textContent =
+                "All sensors operating normally";
+
+
+            document
+                .getElementById(
+                    "recovery-message"
+                )
+                .textContent =
+                "No abnormal sensor behavior detected.";
+
+
+            document
+                .getElementById(
+                    "recovery-badge"
+                )
+                .textContent =
+                "NORMAL";
+
+
+            // S2 status
+            setSensorStatus(
+                "s2-status",
+                "NORMAL",
+                "status-normal"
+            );
+
+
+            // S1 status
+            setSensorStatus(
+                "s1-status",
+                "NORMAL",
+                "status-normal"
+            );
+
+
+            // AI model
+            document
+                .getElementById(
+                    "model-info"
+                )
+                .textContent =
+                "Historical sensor relationship is being used for anomaly detection and expected-value estimation.";
+
+
+            updateRecoveryDetails(
+                data
+            );
+
+        }
+
+
+
+        // =================================
+        // RECOVERED
+        // =================================
+
+        else if (
+            data.status ===
+            "recovered"
+        ) {
+
+            // Network
+            document
+                .getElementById(
+                    "network-health"
+                )
+                .textContent =
+                "RECOVERING";
+
+
+            document
+                .getElementById(
+                    "network-status"
+                )
+                .textContent =
+                "DATA RECOVERY";
+
+
+            // Recovery panel
+            document
+                .getElementById(
+                    "recovery-title"
+                )
+                .textContent =
+                "Sensor Fault Detected";
+
+
+            document
+                .getElementById(
+                    "recovery-message"
+                )
+                .textContent =
+
+                data.faulty_sensor
+                + " abnormal reading detected. "
+                + "Original: "
+                + data.original_temperature
+                + "°C → Expected: "
+                + data.expected_temperature
+                + "°C → Recovered: "
+                + data.recovered_temperature
+                + "°C";
+
+
+            document
+                .getElementById(
+                    "recovery-badge"
+                )
+                .textContent =
+                "DATA RECOVERED";
+
+
+            // --------------------------------
+            // Show recovering state
+            // --------------------------------
+
+            if (
+                data.faulty_sensor ===
+                "S2"
+            ) {
+
+                setSensorStatus(
+                    "s2-status",
+                    "RECOVERING",
+                    "status-recovering"
+                );
+
+
+                // Show recovered value
+                document
+                    .getElementById(
+                        "s2-temp"
+                    )
+                    .textContent =
+
+                    Number(
+                        data.recovered_temperature
+                    ).toFixed(2)
+                    + "°C";
+
+
+                // Show recovered state
+                setSensorStatus(
+                    "s2-status",
+                    "RECOVERED",
+                    "status-recovered"
+                );
+
+            }
+
+
+            // --------------------------------
+            // AI model information
+            // --------------------------------
+
+            const model =
+                data.model;
+
+
+            if (model) {
+
+                document
+                    .getElementById(
+                        "model-info"
+                    )
+                    .textContent =
+
+                    "Model learned from "
+                    + model.training_samples
+                    + " normal sensor observations. "
+                    + "S2 is estimated using the learned S1 → S2 relationship.";
+
+            }
+
+
+            updateRecoveryDetails(
+                data
+            );
+
+        }
+
+
+
+        // =================================
+        // WAITING
+        // =================================
+
+        else if (
+            data.status ===
+            "waiting"
+        ) {
+
+            document
+                .getElementById(
+                    "network-health"
+                )
+                .textContent =
+                "--";
+
+
+            document
+                .getElementById(
+                    "network-status"
+                )
+                .textContent =
+                "WAITING";
+
+
+            // S1
+            setSensorStatus(
+                "s1-status",
+                "WAITING",
+                "status-waiting"
+            );
+
+
+            // S2
+            setSensorStatus(
+                "s2-status",
+                "WAITING",
+                "status-waiting"
+            );
+
+
+            document
+                .getElementById(
+                    "recovery-title"
+                )
+                .textContent =
+                "Waiting for sensor data";
+
+
+            document
+                .getElementById(
+                    "recovery-message"
+                )
+                .textContent =
+                data.message;
+
+
+            document
+                .getElementById(
+                    "recovery-badge"
+                )
+                .textContent =
+                "WAITING";
+
+        }
+
+
+
+        // =================================
+        // TRAINING
+        // =================================
+
+        else if (
+            data.status ===
+            "insufficient_data"
+        ) {
+
+            document
+                .getElementById(
+                    "network-health"
+                )
+                .textContent =
+                "--";
+
+
+            document
+                .getElementById(
+                    "network-status"
+                )
+                .textContent =
+                "TRAINING";
+
+
+            // S1
+            setSensorStatus(
+                "s1-status",
+                "TRAINING",
+                "status-waiting"
+            );
+
+
+            // S2
+            setSensorStatus(
+                "s2-status",
+                "TRAINING",
+                "status-waiting"
+            );
+
+
+            document
+                .getElementById(
+                    "recovery-title"
+                )
+                .textContent =
+                "Building sensor relationship";
+
+
+            document
+                .getElementById(
+                    "recovery-message"
+                )
+                .textContent =
+                data.message;
+
+
+            document
+                .getElementById(
+                    "recovery-badge"
+                )
+                .textContent =
+                "LEARNING";
+
+        }
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Data recovery error:",
+            error
+        );
+
+
+        // Network error
+        document
+            .getElementById(
+                "network-status"
+            )
+            .textContent =
+            "ERROR";
+
+
+        // S1 error
+        setSensorStatus(
+            "s1-status",
+            "ERROR",
+            "status-error"
+        );
+
+
+        // S2 error
+        setSensorStatus(
+            "s2-status",
+            "ERROR",
+            "status-error"
+        );
+
+
+        document
+            .getElementById(
+                "recovery-title"
+            )
+            .textContent =
+            "Backend connection error";
+
+
+        document
+            .getElementById(
+                "recovery-message"
+            )
+            .textContent =
+            "Unable to communicate with the AIoT backend.";
+
+
+        document
+            .getElementById(
+                "recovery-badge"
+            )
+            .textContent =
+            "ERROR";
+
+    }
+
+}
+    function updateRecoveryDetails(
+        data
+    ) {
+
+        // Actual reading
+
+        if (
+            data.original_temperature
+            !== undefined
+        ) {
+
+            document
+                .getElementById(
+                    "actual-value"
+                )
+                .textContent =
+                data.original_temperature
+                + "°C";
+
+        }
+
+
+        else if (
+            data.temperature
+            !== undefined
+        ) {
+
+            document
+                .getElementById(
+                    "actual-value"
+                )
+                .textContent =
+                data.temperature
+                + "°C";
+
+        }
+
+
+        // Expected reading
+
+        if (
+            data.expected_temperature
+            !== undefined
+        ) {
+
+            document
+                .getElementById(
+                    "expected-value"
+                )
+                .textContent =
+                data.expected_temperature
+                + "°C";
+
+        }
+
+
+        // Recovered value
+
+        if (
+            data.recovered_temperature
+            !== undefined
+        ) {
+
+            const recoveredValue = data.recovered_temperature;
+
+document.getElementById("recovered-value").textContent =
+    recoveredValue !== null &&
+    recoveredValue !== undefined
+        ? recoveredValue.toFixed(2) + "°C"
+        : "N/A";
+
+        }
+
+
+        // Difference
+
+        if (
+            data.difference
+            !== undefined
+        ) {
+
+            document
+                .getElementById(
+                    "difference-value"
+                )
+                .textContent =
+                data.difference
+                + "°C";
+
+        }
+
+    }
+
+    // =====================================
+// LOAD RECOVERY HISTORY
+// =====================================
+
+async function loadRecoveryHistory() {
+
+    try {
+
+        const response =
+            await fetch("/api/recovery-history");
+
+        const data =
+            await response.json();
+
+
+        const tableBody =
+            document.getElementById(
+                "recovery-history-body"
+            );
+
+
+        if (
+            !tableBody
+            || data.status !== "success"
+        ) {
+
+            return;
+
+        }
+
+
+        // ---------------------------------
+        // NO RECOVERY EVENTS
+        // ---------------------------------
+
+        if (
+            !data.events
+            || data.events.length === 0
+        ) {
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="7"
+                        class="recovery-empty"
+                    >
+                        No recovery events recorded yet.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        // ---------------------------------
+        // BUILD TABLE
+        // ---------------------------------
+
+        tableBody.innerHTML = "";
+
+
+        data.events.forEach(
+            (event) => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${formatRecoveryTime(
+                            event.timestamp
+                        )}
+                    </td>
+
+                    <td>
+                        ${event.sensor_id}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            event.original_temperature
+                        ).toFixed(2)}°C
+                    </td>
+
+                    <td>
+                        ${Number(
+                            event.expected_temperature
+                        ).toFixed(2)}°C
+                    </td>
+
+                    <td>
+                        ${Number(
+                            event.recovered_temperature
+                        ).toFixed(2)}°C
+                    </td>
+
+                    <td>
+                        ${Number(
+                            event.difference
+                        ).toFixed(2)}°C
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="recovery-status recovered"
+                        >
+                            ${event.status}
+                        </span>
+
+                    </td>
+
+                `;
+
+
+                tableBody.appendChild(row);
+
+            }
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Recovery history error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// =====================================
+// FORMAT RECOVERY TIMESTAMP
+// =====================================
+
+function formatRecoveryTime(timestamp) {
+
+    if (!timestamp) {
+
+        return "--";
+
+    }
+
+
+    // SQLite timestamp:
+    // 2026-09-23 08:01:11
+
+    const parts =
+        timestamp.split(" ");
+
+
+    if (parts.length === 2) {
+
+        return parts[1];
+
+    }
+
+
+    return timestamp;
+
+}
+
+
+
+    // =====================================
+    // INITIAL LOAD
+    // =====================================
+
+    loadSensorData();
+
+loadDataRecovery();
+
+loadTemperatureHistory();
+
+loadRecoveryHistory();
+
+ updateSystemOverview();
+
+
+
+    // =====================================
+    // AUTOMATIC REFRESH
+    // =====================================
+
+    setInterval(
+
+        () => {
+
+           loadSensorData();
+
+loadDataRecovery();
+
+loadTemperatureHistory();
+
+loadRecoveryHistory();
+
+ updateSystemOverview();
+
+        },
+
+        5000
+
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
